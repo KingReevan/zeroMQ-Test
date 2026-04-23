@@ -74,7 +74,7 @@ async def donald_trump_service():
         # Envelope: [Destination_ID, Payload]
         await worker.send_multipart([b"CitizenOne", payload])
         await worker.send_multipart([b"CitizenTwo", payload])
-
+        await worker.send_multipart([b"ForeignCitizen", payload])
         # Wait 10 seconds before the next tweet to avoid rate limits
         await asyncio.sleep(10)
 
