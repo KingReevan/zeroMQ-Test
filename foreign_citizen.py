@@ -2,7 +2,6 @@ import json
 import zmq
 from agent_framework import Agent
 from settings import llm_client, zmq_context
-from settings import zmq_context
 import asyncio
 import sys
 
