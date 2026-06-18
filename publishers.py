@@ -2,6 +2,11 @@ import asyncio
 import zmq
 from agent_framework import Agent
 from settings import llm_client, zmq_context
+from pydantic import BaseModel
+
+
+class Quote(BaseModel):
+    text: list[str]
 
 
 async def quote_service():
@@ -15,8 +20,9 @@ async def quote_service():
         client=llm_client,
         name="QuoteGenerator",
         instructions=(
-            "You are a quote generator that provides random quotes of the day. Only respond with the quote text, no formatting or additional information."
+            "You are a quote generator that provides random quotes of the day. Only respond with the quote text, no formatting or additional information. Output should be a list where each word is an element."
         ),
+        default_options={"response_format": Quote},  # type: ignore
     )
 
     print("[QuoteService] Bound to tcp://localhost:5555. Starting broadcast...")
